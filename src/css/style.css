@@ -18,7 +18,7 @@ body {
 
 .container {
     background-color: #1b171f;
-    width: 100%;
+    width: 95%;
     max-width: 70rem;
     display: flex;
     align-items: center;
@@ -33,6 +33,7 @@ body {
     height: 100%;
     object-fit: cover;
     border-radius: 0.5rem;
+    filter: brightness(0.6);
 }
 
 .container-form {
@@ -65,45 +66,48 @@ body {
     margin-bottom: 1rem;
 }
 
-.container-form form > .form-row-one > input {
+.container-form form > .form-row-one > div {
     width: 50%;
+}
+
+.container-form form > .form-row-one > div > input {
     padding: 0.8rem;
     color: #fff;
     text-indent: 5px;
-    border: none;
     background-color: #332b3a;
     border-radius: 0.3rem;
     outline: none;
+    border: none;
 }
 
 .container-form form > .form-row-two {
     margin-bottom: 1rem;   
 }
 
-.container-form form > .form-row-two > input {
+.container-form form > .form-row-two > div > input {
     width: 100%;
     padding: 0.8rem;
     color: #fff;
     text-indent: 5px;
-    border: none;
     background-color: #332b3a;
     border-radius: 0.3rem;
-    outline: none;   
+    outline: none;
+    border: none;
 }
 
 .container-form form > .form-row-tree {
     margin-bottom: 1rem;
 }
 
-.container-form form > .form-row-tree > input {
+.container-form form > .form-row-tree > div > input {
     width: 100%;
     padding: 0.8rem;
     color: #fff;
     text-indent: 5px;
-    border: none;
     background-color: #332b3a;
     border-radius: 0.3rem;
     outline: none; 
+    border: none;
 }
 
 .container-form form > .row-checkbox {

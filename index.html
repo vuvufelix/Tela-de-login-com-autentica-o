@@ -15,14 +15,26 @@
                 <h2>Crie a sua conta</h2>
                 <span>Ja tens uma conta ? Faça <a href="#">Login</a></span>
                 <div class="form-row-one">
-                    <input type="text" name="first_name" id="first_name" placeholder="Primeiro nome" required autocomplete="additional-name">
-                    <input type="text" name="last_name" id="last_name" placeholder="Último nome" required autocomplete="additional-name">
+                    <div>
+                        <input type="text" name="first_name" id="first_name" placeholder="Primeiro nome" required autocomplete="additional-name">
+                        <span id="sms_first_name" class="sms"></span>
+                    </div>
+                    <div>
+                        <input type="text" name="last_name" id="last_name" placeholder="Último nome" required autocomplete="additional-name">
+                        <span id="sms_last_name" class="sms"></span>
+                    </div>
                 </div>
                 <div class="form-row-two">
-                    <input type="email" name="email" id="email" required placeholder="Email" autocomplete="email">
+                    <div>
+                        <input type="email" name="email" id="email" required placeholder="Email" autocomplete="email">
+                        <span id="sms_email" class="sms"></span>
+                    </div>
                 </div>
                 <div class="form-row-tree">
-                    <input type="password" name="password" id="password" required placeholder="Entrar com a tua palavra passe" autocomplete="current-password">
+                    <div>
+                        <input type="password" name="password" id="password" required placeholder="Entrar com a tua palavra passe" autocomplete="current-password">
+                        <span id="sms_password" class="sms"></span>
+                    </div>
                 </div>
                 <div class="row-checkbox">
                     <input type="checkbox" name="terms" id="terms" required>
@@ -35,17 +47,17 @@
                     <small>Ou entre com</small>
                 </div>
                 <div class="opcion">
-                    <button>
+                    <button id="google_btn">
                         <img src="src/img/icons8-google-logo-48 (1).png" alt="" style="width: 1rem">
                         <span>Google</span>
                     </button>
-                    <button>
+                    <button id="apple_btn">
                         <i class="fa-brands fa-apple"></i> Apple
                     </button>
                 </div>
             </form>
         </div>
     </div>
-    <script src="src/js/script.js"></script>
+    <script src="src/js/script.js" type="module"></script>
 </body>
 </html>
