@@ -1,8 +1,24 @@
 const terms = document.querySelector("#terms")
 const btn = document.querySelector("#btn")
+const container = document.querySelector(".container")
 
 const google_btn = document.querySelector("#google_btn")
 const apple_btn = document.querySelector("#apple_btn")
+
+const mensagem = (texto, cor) => {
+    Toastify({
+        text: texto,
+        duration: 2000,
+        close: true,
+        gravity: "top",
+        position: "right", 
+        stopOnFocus: true,
+        style: {
+          background: cor,
+          color: "black"
+        }
+    }).showToast();
+}
 
 btn.addEventListener("click", (e) => {
     e.preventDefault()
@@ -81,6 +97,8 @@ btn.addEventListener("click", (e) => {
 
     }
 
+    container.style.height = "40rem"
+
     verifiquer()
 
     const sms = [...document.querySelectorAll(".sms")]
@@ -92,7 +110,13 @@ btn.addEventListener("click", (e) => {
     })
 
     if(sms_value && terms.checked) {
-        alert("Cadastro realizado com sucesso")
+        mensagem("Cadastro realizado com sucesso", "greenyellow")
+        container.style.height = "35rem"
+
+        sms_password.textContent = ""
+        sms_email.textContent = ""
+        sms_last_name.textContent = ""
+        sms_first_name.textContent = ""
     }
 
 })
