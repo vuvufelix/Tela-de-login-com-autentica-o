@@ -1,3 +1,6 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js"
+
 const terms = document.querySelector("#terms")
 const btn = document.querySelector("#btn")
 const container = document.querySelector(".container")
@@ -5,6 +8,36 @@ const container = document.querySelector(".container")
 const google_btn = document.querySelector("#google_btn")
 const apple_btn = document.querySelector("#apple_btn")
 
+// Firebase cadastro
+const firebaseConfig = {
+    apiKey: "AIzaSyCSb6bZyk0U5T1jMSu8A93yYOYRBLtqv_4",
+    authDomain: "tela-de-login-com-autenticacao.firebaseapp.com",
+    projectId: "tela-de-login-com-autenticacao",
+    storageBucket: "tela-de-login-com-autenticacao.firebasestorage.app",
+    messagingSenderId: "377829093201",
+    appId: "1:377829093201:web:e0c9d1f621b0a44252ed70"
+}
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const createUser = async (email, password) => {
+
+    try {
+
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+        
+        alert("Conta criada com sucesso " + userCredential.user)
+
+    } catch (error) {
+
+        alert("Erro ao registrar: " + error.message)
+    }
+
+}
+
+// Mensagem de cadastro
 const mensagem = (texto, cor) => {
     Toastify({
         text: texto,
@@ -20,6 +53,7 @@ const mensagem = (texto, cor) => {
     }).showToast();
 }
 
+// Botão para cadastrar
 btn.addEventListener("click", (e) => {
     e.preventDefault()
 
@@ -110,6 +144,7 @@ btn.addEventListener("click", (e) => {
     })
 
     if(sms_value && terms.checked) {
+        createUser(sign_up.email, sign_up.password)
         mensagem("Cadastro realizado com sucesso", "greenyellow")
         container.style.height = "35rem"
 
