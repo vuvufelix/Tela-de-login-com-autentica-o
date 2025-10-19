@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js"
+import { firebaseConfig, createUser, loginWithGoogle, loginWithFacebook } from "./firebase.js";
 
 const terms = document.querySelector("#terms")
 const btn = document.querySelector("#btn")
@@ -18,81 +19,11 @@ const sms_password = document.querySelector("#sms_password")
 const google_btn = document.querySelector("#google_btn")
 const apple_btn = document.querySelector("#apple_btn")
 
-// Firebase cadastro
-const firebaseConfig = {
-    apiKey: "AIzaSyCSb6bZyk0U5T1jMSu8A93yYOYRBLtqv_4",
-    authDomain: "tela-de-login-com-autenticacao.firebaseapp.com",
-    projectId: "tela-de-login-com-autenticacao",
-    storageBucket: "tela-de-login-com-autenticacao.firebasestorage.app",
-    messagingSenderId: "377829093201",
-    appId: "1:377829093201:web:e0c9d1f621b0a44252ed70"
-}
-
 const app = initializeApp(firebaseConfig)
 
 const auth = getAuth(app)
 const provider = new GoogleAuthProvider()
 const providerFacebook = new FacebookAuthProvider();
-
-const createUser = async (email, password) => {
-
-    try {
-
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password)
-        
-        alert("Conta criada com sucesso " + userCredential.user)
-
-    } catch (error) {
-
-        alert("Erro ao registrar: " + error.message)
-    }
-
-}
-
-const loginWithGoogle = (autorization, provid) => {
-    signInWithPopup(autorization, provid)
-    .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result)
-        const user = result.user
-        message("Usuário logado com sucesso!", "greenyellow")
-        console.log(user)
-    }).catch((error) => {
-        const errorMessage = error.message
-        console.log(errorMessage)
-        message("Falha ao fazer login!", "red")
-  })
-}
-
-const loginWithFacebook = (autorization, provid) => {
-    signInWithPopup(autorization, provid)
-    .then((result) => {
-        const user = result.user
-        console.log(user)
-        message("Usuário logado com sucesso!", "greenyellow")
-    })
-    .catch((error) => {
-        const errorMessage = error.message
-        console.log(errorMessage)
-        message("Falha ao fazer login!", "red")
-    })
-}
-
-
-// Mensagem de cadastro
-const message = (texto, cor) => {
-    Toastify({
-        text: texto,
-        duration: 2000,
-        close: true,
-        gravity: "top",
-        position: "right", 
-        stopOnFocus: true,
-        style: {
-          background: cor,
-          color: "black"
-        }
-    }).showToast();
-}
 
 // Botão para cadastrar
 btn.addEventListener("click", (e) => {
@@ -173,8 +104,7 @@ btn.addEventListener("click", (e) => {
     })
 
     if(sms_value && terms.checked) {
-        createUser(email.value, password.value)
-        message("Cadastro realizado com sucesso", "greenyellow")
+        createUser(email.value, password.value, createUserWithEmailAndPassword, auth)
         container.style.height = "35rem"
 
         password.value = ""
@@ -192,10 +122,10 @@ btn.addEventListener("click", (e) => {
 
 google_btn.addEventListener("click", (e) => {
     e.preventDefault()
-    loginWithGoogle(auth, provider)
+    loginWithGoogle(auth, provider, GoogleAuthProvider)
 })
 
 apple_btn.addEventListener("click", (e) => {
     e.preventDefault()
-    loginWithFacebook(auth, providerFacebook)
+    loginWithFacebook(auth, providerFacebook, signInWithPopup, FacebookAuthProvider)
 })
